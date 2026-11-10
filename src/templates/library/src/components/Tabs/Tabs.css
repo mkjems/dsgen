@@ -1,0 +1,46 @@
+.ds-tabs { display: flex; flex-direction: column; gap: var(--ds-space-4); min-width: 0; }
+
+.ds-tabs__list { display: flex; gap: var(--ds-space-1); overflow-x: auto; scrollbar-width: none; }
+.ds-tabs--line .ds-tabs__list { border-bottom: var(--ds-border-width) solid var(--ds-color-border); gap: var(--ds-space-4); }
+.ds-tabs--pill .ds-tabs__list { padding: var(--ds-space-1); background: var(--ds-color-surface); border-radius: var(--ds-radius-md); width: fit-content; max-width: 100%; }
+.ds-tabs--full .ds-tabs__list { width: 100%; }
+.ds-tabs--full .ds-tabs__tab { flex: 1; }
+
+.ds-tabs__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  height: var(--ds-control-height-md);
+  padding: 0 var(--ds-space-2);
+  border: 0;
+  background: transparent;
+  color: var(--ds-color-text-muted);
+  font: inherit;
+  font-weight: var(--ds-font-weight-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--ds-duration-fast), background-color var(--ds-duration-fast);
+}
+
+.ds-tabs__tab:hover:not(:disabled) { color: var(--ds-color-text); }
+.ds-tabs__tab:disabled { opacity: 0.45; cursor: not-allowed; }
+.ds-tabs__tab:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-color-focus-ring); outline-offset: -2px; border-radius: var(--ds-radius-sm); }
+
+.ds-tabs--line .ds-tabs__tab[aria-selected='true'] { color: var(--ds-color-primary-text); }
+.ds-tabs--line .ds-tabs__tab[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--ds-border-width) * -1);
+  height: 2px;
+  background: var(--ds-color-primary);
+  border-radius: 2px 2px 0 0;
+}
+
+.ds-tabs--pill .ds-tabs__tab { height: calc(var(--ds-control-height-md) - 8px); padding: 0 var(--ds-space-3); border-radius: calc(var(--ds-radius-md) - 2px); }
+.ds-tabs--pill .ds-tabs__tab[aria-selected='true'] { background: var(--ds-color-surface-raised); color: var(--ds-color-text); box-shadow: var(--ds-shadow-sm); }
+
+.ds-tabs__panel:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-color-focus-ring); outline-offset: 4px; border-radius: var(--ds-radius-sm); }

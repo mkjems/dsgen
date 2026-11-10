@@ -1,0 +1,75 @@
+# Getting started
+
+%%name%% is a React component library with design tokens, built for consistent and accessible interfaces. This guide takes you from installation to your first screen.
+
+## 1. Install
+
+```bash
+npm install %%packageName%%
+```
+
+React 19 or newer is a peer dependency.
+
+## 2. Load the stylesheet once
+
+The stylesheet contains the design tokens, base styles and every component's CSS. Import it at the root of your app, for example in `main.tsx`:
+
+```tsx
+import '%%packageName%%/styles.css';
+```
+
+## 3. Use components
+
+```tsx
+import { Button, Stack, Text } from '%%packageName%%';
+
+export function Welcome() {
+  return (
+    <Stack gap={3}>
+      <Text variant="h2">Welcome back</Text>
+      <Text tone="muted">You have 3 new notifications.</Text>
+      <Stack direction="row" gap={2}>
+        <Button>View notifications</Button>
+        <Button variant="ghost">Dismiss</Button>
+      </Stack>
+    </Stack>
+  );
+}
+```
+
+Every component is fully typed. Your editor autocompletes props and their accepted values, and each prop is documented on its component page.
+
+## 4. Use tokens in your own styles
+
+Design tokens are CSS custom properties prefixed with `%%prefix%%-`. Use them for anything the components do not cover:
+
+```css
+.sidebar {
+  background: var(--%%prefix%%-color-surface);
+  border-right: var(--%%prefix%%-border-width) solid var(--%%prefix%%-color-border);
+  padding: var(--%%prefix%%-space-6);
+}
+```
+
+Or reference them from TypeScript:
+
+```tsx
+import { tokens } from '%%packageName%%';
+
+<div style={{ color: tokens.semantic.colorTextMuted }} />;
+```
+
+## What's included
+
+| Area | Contents |
+| --- | --- |
+| Components | %%componentCount%% components: %%componentList%% |
+| Tokens | Palettes, semantic colours, typography, spacing, radius, shadows, sizing, motion |
+| Formats | CSS variables, W3C design-token JSON, typed TypeScript object |
+| Docs | Live examples, interactive playgrounds, props reference, accessibility notes |
+
+## Next steps
+
+- Read **How it works** to understand the architecture and conventions.
+- Read **Theming & dark mode** to customise the look.
+- Browse the components in the sidebar. Every page has examples you can copy.

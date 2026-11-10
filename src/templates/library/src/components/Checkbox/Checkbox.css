@@ -1,0 +1,58 @@
+.ds-checkbox {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--ds-space-2) var(--ds-space-3);
+}
+
+.ds-checkbox__input {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ds-checkbox__box {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  background: var(--ds-color-surface-raised);
+  border: var(--ds-border-width) solid var(--ds-color-border-strong);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-color-on-primary);
+  pointer-events: none;
+  transition: background-color var(--ds-duration-fast), border-color var(--ds-duration-fast);
+}
+
+.ds-checkbox__check { width: 14px; height: 14px; opacity: 0; }
+.ds-checkbox__dash { position: absolute; width: 10px; height: 2px; border-radius: 1px; background: currentColor; opacity: 0; }
+
+.ds-checkbox__input:hover + .ds-checkbox__box { border-color: var(--ds-color-primary); }
+
+.ds-checkbox__input:checked + .ds-checkbox__box,
+.ds-checkbox__input:indeterminate + .ds-checkbox__box {
+  background: var(--ds-color-primary);
+  border-color: var(--ds-color-primary);
+}
+.ds-checkbox__input:checked:not(:indeterminate) + .ds-checkbox__box .ds-checkbox__check { opacity: 1; }
+.ds-checkbox__input:indeterminate + .ds-checkbox__box .ds-checkbox__dash { opacity: 1; }
+
+.ds-checkbox__input:focus-visible + .ds-checkbox__box {
+  outline: var(--ds-focus-ring-width) solid var(--ds-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.ds-checkbox__input[aria-invalid='true'] + .ds-checkbox__box { border-color: var(--ds-color-danger); }
+
+.ds-checkbox__text { display: flex; flex-direction: column; gap: 2px; }
+.ds-checkbox__label { color: var(--ds-color-text); cursor: pointer; line-height: 1.5; }
+.ds-checkbox__description { font-size: var(--ds-font-size-sm); color: var(--ds-color-text-muted); }
+
+.ds-checkbox--disabled { opacity: 0.55; }
+.ds-checkbox--disabled .ds-checkbox__input,
+.ds-checkbox--disabled .ds-checkbox__label { cursor: not-allowed; }

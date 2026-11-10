@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "identity": {
+    "name": "Acme UI",
+    "packageName": "@acme/ui",
+    "prefix": "acme",
+    "description": "The design system for Acme products.",
+    "version": "0.1.0",
+    "author": "Acme Design Team",
+    "license": "MIT"
+  },
+  "colors": {
+    "primary": "#4f46e5",
+    "neutral": "#64748b",
+    "success": "#16a34a",
+    "warning": "#d97706",
+    "danger": "#dc2626",
+    "info": "#0284c7",
+    "darkMode": true
+  },
+  "typography": {
+    "bodyFont": "\"Inter\", system-ui, sans-serif",
+    "headingFont": "\"Inter\", system-ui, sans-serif",
+    "monoFont": "\"JetBrains Mono\", ui-monospace, monospace",
+    "baseSize": 16,
+    "scaleRatio": 1.25,
+    "lineHeight": 1.55,
+    "headingWeight": 700
+  },
+  "shape": {
+    "spacingUnit": 4,
+    "radius": "rounded",
+    "shadows": "soft",
+    "density": "comfortable",
+    "borderWidth": 1
+  },
+  "components": {
+    "selected": [
+      "Button",
+      "TextField",
+      "Select",
+      "Checkbox",
+      "Switch",
+      "RadioGroup",
+      "Badge",
+      "Card",
+      "Alert",
+      "Avatar",
+      "Tabs",
+      "Dialog",
+      "Tooltip",
+      "Spinner"
+    ]
+  },
+  "docs": {
+    "title": "Acme UI",
+    "tagline": "Build consistent, accessible Acme products faster.",
+    "repositoryUrl": "",
+    "showcases": [
+      "signup",
+      "settings",
+      "dashboard"
+    ],
+    "includePlayground": true,
+    "includeHowItWorks": true
+  }
+}

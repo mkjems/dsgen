@@ -1,0 +1,81 @@
+.ds-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  height: var(--ds-control-height-md);
+  padding: 0 var(--ds-space-4);
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-font-size-md);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    border-color var(--ds-duration-fast) var(--ds-easing-standard),
+    color var(--ds-duration-fast) var(--ds-easing-standard),
+    box-shadow var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-button:focus-visible {
+  outline: var(--ds-focus-ring-width) solid var(--ds-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.ds-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.ds-button--sm { height: var(--ds-control-height-sm); padding: 0 var(--ds-space-3); font-size: var(--ds-font-size-sm); }
+.ds-button--lg { height: var(--ds-control-height-lg); padding: 0 var(--ds-space-6); font-size: var(--ds-font-size-lg); }
+.ds-button--full { width: 100%; }
+
+.ds-button--solid {
+  background: var(--ds-color-primary);
+  color: var(--ds-color-on-primary);
+  box-shadow: var(--ds-shadow-sm);
+}
+.ds-button--solid:hover:not(:disabled) { background: var(--ds-color-primary-hover); }
+.ds-button--solid:active:not(:disabled) { background: var(--ds-color-primary-active); }
+
+.ds-button--outline {
+  background: var(--ds-color-surface-raised);
+  border-color: var(--ds-color-border-strong);
+  color: var(--ds-color-text);
+}
+.ds-button--outline:hover:not(:disabled) { background: var(--ds-color-surface-hover); }
+
+.ds-button--ghost {
+  background: transparent;
+  color: var(--ds-color-primary-text);
+}
+.ds-button--ghost:hover:not(:disabled) { background: var(--ds-color-primary-subtle); }
+
+.ds-button--danger {
+  background: var(--ds-color-danger);
+  color: var(--ds-color-on-danger);
+}
+.ds-button--danger:hover:not(:disabled) { filter: brightness(0.92); }
+
+.ds-button__icon { display: inline-flex; font-size: 1.15em; }
+.ds-button__icon svg { width: 1em; height: 1em; }
+
+.ds-button--loading .ds-button__label,
+.ds-button--loading .ds-button__icon { visibility: hidden; }
+
+.ds-button__spinner {
+  position: absolute;
+  width: 1.1em;
+  height: 1.1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ds-button-spin 0.7s linear infinite;
+}
+
+@keyframes ds-button-spin { to { transform: rotate(360deg); } }

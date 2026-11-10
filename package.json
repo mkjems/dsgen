@@ -1,0 +1,30 @@
+{
+  "name": "design-system-generator",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Wizard + generator that produces complete React design systems with documentation sites.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "generate": "tsx src/cli/generate.ts",
+    "check:templates": "tsx src/cli/check-templates.ts"
+  },
+  "dependencies": {
+    "fflate": "^0.8.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "sucrase": "^3.35.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.7"
+  }
+}

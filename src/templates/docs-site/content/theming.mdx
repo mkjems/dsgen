@@ -1,0 +1,64 @@
+# Theming & dark mode
+
+All visual decisions in %%name%% are CSS custom properties, so you theme the system by redefining variables. You don't need to rebuild anything.
+
+## Override tokens globally
+
+Load your overrides after the library stylesheet:
+
+```css
+/* app.css, imported after %%packageName%%/styles.css */
+:root {
+  --%%prefix%%-color-primary: #0f766e;
+  --%%prefix%%-color-primary-hover: #115e59;
+  --%%prefix%%-radius-md: 4px;
+}
+```
+
+Override **semantic** tokens (`color-primary`, `color-text`, …), not palette steps. Components read semantic tokens only.
+
+## Dark mode
+
+Dark mode is built in. It activates in two ways:
+
+1. **Automatically**, when the operating system prefers a dark colour scheme.
+2. **Explicitly**, with a `data-theme` attribute, which also lets users override their OS setting:
+
+```tsx
+document.documentElement.dataset.theme = 'dark';   // force dark
+document.documentElement.dataset.theme = 'light';  // force light
+delete document.documentElement.dataset.theme;     // follow the OS
+```
+
+The theme switcher in the header of this site does exactly this. If dark mode was disabled when the system was generated, only the light theme is emitted.
+
+## Scoped themes
+
+Custom properties inherit, so you can theme part of a page by redefining tokens on any element:
+
+```css
+.marketing-hero {
+  --%%prefix%%-color-primary: #e11d48;
+  --%%prefix%%-color-primary-hover: #be123c;
+}
+```
+
+```tsx
+<section data-theme="dark">
+  {/* everything in here renders with the dark tokens */}
+</section>
+```
+
+## Customising a single component
+
+Every component accepts `className` and `style`, and its classes are stable. Prefer tokens over raw values:
+
+```css
+.checkout .%%prefix%%-button--solid {
+  box-shadow: var(--%%prefix%%-shadow-md);
+}
+```
+
+## Fonts
+
+The font families are tokens too (`--%%prefix%%-font-body`, `--%%prefix%%-font-heading`, `--%%prefix%%-font-mono`). The library does not load web fonts itself. Add them to your app, for example with a Google Fonts link in `index.html`, the same way this docs site does.

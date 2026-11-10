@@ -1,0 +1,33 @@
+.ds-badge {
+  --ds-badge-fg: var(--ds-color-text);
+  --ds-badge-bg: var(--ds-color-surface-hover);
+  --ds-badge-border: var(--ds-color-border);
+  --ds-badge-solid: var(--ds-color-text-muted);
+  --ds-badge-on-solid: var(--ds-color-bg);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1_5);
+  height: 24px;
+  padding: 0 var(--ds-space-2);
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-radius-sm);
+  font-size: var(--ds-font-size-sm);
+  font-weight: var(--ds-font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ds-badge--sm { height: 20px; padding: 0 var(--ds-space-1_5); font-size: var(--ds-font-size-xs); }
+
+.ds-badge--primary { --ds-badge-fg: var(--ds-color-primary-text); --ds-badge-bg: var(--ds-color-primary-subtle); --ds-badge-border: var(--ds-color-primary); --ds-badge-solid: var(--ds-color-primary); --ds-badge-on-solid: var(--ds-color-on-primary); }
+.ds-badge--success { --ds-badge-fg: var(--ds-color-success-text); --ds-badge-bg: var(--ds-color-success-subtle); --ds-badge-border: var(--ds-color-success-border); --ds-badge-solid: var(--ds-color-success); --ds-badge-on-solid: var(--ds-color-on-success); }
+.ds-badge--warning { --ds-badge-fg: var(--ds-color-warning-text); --ds-badge-bg: var(--ds-color-warning-subtle); --ds-badge-border: var(--ds-color-warning-border); --ds-badge-solid: var(--ds-color-warning); --ds-badge-on-solid: var(--ds-color-on-warning); }
+.ds-badge--danger { --ds-badge-fg: var(--ds-color-danger-text); --ds-badge-bg: var(--ds-color-danger-subtle); --ds-badge-border: var(--ds-color-danger-border); --ds-badge-solid: var(--ds-color-danger); --ds-badge-on-solid: var(--ds-color-on-danger); }
+.ds-badge--info { --ds-badge-fg: var(--ds-color-info-text); --ds-badge-bg: var(--ds-color-info-subtle); --ds-badge-border: var(--ds-color-info-border); --ds-badge-solid: var(--ds-color-info); --ds-badge-on-solid: var(--ds-color-on-info); }
+
+.ds-badge--subtle { color: var(--ds-badge-fg); background: var(--ds-badge-bg); }
+.ds-badge--solid { color: var(--ds-badge-on-solid); background: var(--ds-badge-solid); }
+.ds-badge--outline { color: var(--ds-badge-fg); border-color: var(--ds-badge-border); background: transparent; }
+
+.ds-badge__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }

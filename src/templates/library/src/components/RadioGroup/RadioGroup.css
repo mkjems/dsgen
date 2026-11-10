@@ -1,0 +1,70 @@
+.ds-radiogroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.ds-radiogroup > legend { padding: 0; margin-bottom: var(--ds-space-2); }
+
+.ds-radiogroup__options { display: flex; flex-direction: column; gap: var(--ds-space-3); }
+.ds-radiogroup--horizontal .ds-radiogroup__options { flex-direction: row; flex-wrap: wrap; gap: var(--ds-space-6); }
+
+.ds-radio {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ds-space-3);
+  align-items: start;
+}
+
+.ds-radio__input {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ds-radio__dot {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border: var(--ds-border-width) solid var(--ds-color-border-strong);
+  border-radius: 50%;
+  background: var(--ds-color-surface-raised);
+  pointer-events: none;
+  transition: border-color var(--ds-duration-fast);
+}
+
+.ds-radio__dot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ds-color-primary);
+  transform: scale(0);
+  transition: transform var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-radio__input:hover + .ds-radio__dot { border-color: var(--ds-color-primary); }
+.ds-radio__input:checked + .ds-radio__dot { border-color: var(--ds-color-primary); border-width: 2px; }
+.ds-radio__input:checked + .ds-radio__dot::after { transform: scale(1); }
+.ds-radio__input:focus-visible + .ds-radio__dot {
+  outline: var(--ds-focus-ring-width) solid var(--ds-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.ds-radio__text { display: flex; flex-direction: column; gap: 2px; }
+.ds-radio__label { color: var(--ds-color-text); cursor: pointer; line-height: 1.5; }
+.ds-radio__description { font-size: var(--ds-font-size-sm); color: var(--ds-color-text-muted); }
+
+.ds-radio--disabled { opacity: 0.55; }
+.ds-radio--disabled .ds-radio__input,
+.ds-radio--disabled .ds-radio__label { cursor: not-allowed; }

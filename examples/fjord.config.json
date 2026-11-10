@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "identity": {
+    "name": "Fjord",
+    "packageName": "@fjord/design",
+    "prefix": "fjord",
+    "description": "Calm, editorial components for Fjord apps.",
+    "version": "0.1.0",
+    "author": "Fjord Studio",
+    "license": "MIT"
+  },
+  "colors": {
+    "primary": "#0f766e",
+    "neutral": "#6b7280",
+    "success": "#16a34a",
+    "warning": "#d97706",
+    "danger": "#dc2626",
+    "info": "#0284c7",
+    "darkMode": true
+  },
+  "typography": {
+    "bodyFont": "\"IBM Plex Sans\", system-ui, sans-serif",
+    "headingFont": "\"Fraunces\", Georgia, serif",
+    "monoFont": "\"IBM Plex Mono\", ui-monospace, monospace",
+    "baseSize": 16,
+    "scaleRatio": 1.333,
+    "lineHeight": 1.55,
+    "headingWeight": 600
+  },
+  "shape": {
+    "spacingUnit": 8,
+    "radius": "sharp",
+    "shadows": "strong",
+    "density": "compact",
+    "borderWidth": 1
+  },
+  "components": {
+    "selected": [
+      "Button",
+      "TextField",
+      "Checkbox",
+      "Card",
+      "Alert",
+      "Badge",
+      "Avatar",
+      "Tooltip",
+      "Spinner"
+    ]
+  },
+  "docs": {
+    "title": "Fjord Design",
+    "tagline": "Quiet interfaces, clearly documented.",
+    "repositoryUrl": "https://github.com/example/fjord",
+    "showcases": [
+      "signup",
+      "settings",
+      "dashboard"
+    ],
+    "includePlayground": true,
+    "includeHowItWorks": true
+  }
+}

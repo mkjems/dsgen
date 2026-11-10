@@ -1,0 +1,45 @@
+.ds-card {
+  --ds-card-pad: var(--ds-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+  padding: var(--ds-card-pad);
+  border-radius: var(--ds-radius-lg);
+  color: var(--ds-color-text);
+  min-width: 0;
+}
+
+.ds-card--pad-none { --ds-card-pad: 0; }
+.ds-card--pad-sm { --ds-card-pad: var(--ds-space-3); }
+.ds-card--pad-lg { --ds-card-pad: var(--ds-space-8); }
+
+.ds-card--outlined { background: var(--ds-color-surface-raised); border: var(--ds-border-width) solid var(--ds-color-border); }
+.ds-card--elevated { background: var(--ds-color-surface-raised); border: var(--ds-border-width) solid var(--ds-color-border); box-shadow: var(--ds-shadow-md); }
+.ds-card--filled { background: var(--ds-color-surface); }
+
+.ds-card--interactive {
+  cursor: pointer;
+  transition: box-shadow var(--ds-duration-normal) var(--ds-easing-standard), border-color var(--ds-duration-normal), transform var(--ds-duration-normal) var(--ds-easing-standard);
+}
+.ds-card--interactive:hover { border-color: var(--ds-color-border-strong); box-shadow: var(--ds-shadow-lg); transform: translateY(-1px); }
+.ds-card--interactive:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-color-focus-ring); outline-offset: 2px; }
+
+.ds-card__header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--ds-space-4); }
+.ds-card__heading { display: flex; flex-direction: column; gap: var(--ds-space-1); min-width: 0; }
+.ds-card__title {
+  margin: 0;
+  font-family: var(--ds-font-heading);
+  font-size: var(--ds-font-size-lg);
+  font-weight: var(--ds-font-weight-heading);
+  line-height: var(--ds-line-height-heading);
+}
+.ds-card__description { margin: 0; font-size: var(--ds-font-size-sm); color: var(--ds-color-text-muted); }
+.ds-card__actions { display: flex; gap: var(--ds-space-2); flex-shrink: 0; }
+.ds-card__body { min-width: 0; }
+.ds-card__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ds-space-2);
+  padding-top: var(--ds-space-4);
+  border-top: var(--ds-border-width) solid var(--ds-color-border);
+}

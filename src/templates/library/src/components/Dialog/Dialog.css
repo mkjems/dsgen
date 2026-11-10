@@ -1,0 +1,53 @@
+.ds-dialog {
+  width: calc(100% - 2 * var(--ds-space-4));
+  max-width: 520px;
+  max-height: calc(100dvh - 2 * var(--ds-space-8));
+  padding: 0;
+  border: var(--ds-border-width) solid var(--ds-color-border);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-surface-raised);
+  color: var(--ds-color-text);
+  box-shadow: var(--ds-shadow-lg);
+}
+
+.ds-dialog--sm { max-width: 400px; }
+.ds-dialog--lg { max-width: 720px; }
+
+.ds-dialog::backdrop { background: var(--ds-color-overlay); }
+
+.ds-dialog[open] { animation: ds-dialog-in var(--ds-duration-normal) var(--ds-easing-standard); }
+.ds-dialog[open]::backdrop { animation: ds-dialog-fade var(--ds-duration-normal) var(--ds-easing-standard); }
+
+@keyframes ds-dialog-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+@keyframes ds-dialog-fade { from { opacity: 0; } }
+
+.ds-dialog__surface { display: flex; flex-direction: column; gap: var(--ds-space-3); padding: var(--ds-space-6); }
+.ds-dialog__header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--ds-space-4); }
+.ds-dialog__title {
+  margin: 0;
+  font-family: var(--ds-font-heading);
+  font-size: var(--ds-font-size-xl);
+  font-weight: var(--ds-font-weight-heading);
+  line-height: var(--ds-line-height-heading);
+}
+.ds-dialog__description { margin: 0; color: var(--ds-color-text-muted); }
+.ds-dialog__body { padding-top: var(--ds-space-2); }
+.ds-dialog__footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--ds-space-2); padding-top: var(--ds-space-4); }
+
+.ds-dialog__close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  margin: -6px -6px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--ds-color-text-muted);
+  cursor: pointer;
+}
+.ds-dialog__close svg { width: 16px; height: 16px; }
+.ds-dialog__close:hover { background: var(--ds-color-surface-hover); color: var(--ds-color-text); }
+.ds-dialog__close:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-color-focus-ring); }

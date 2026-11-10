@@ -1,0 +1,84 @@
+# How it works
+
+This page explains how %%name%% is put together, so you can use it well, extend it and keep it consistent.
+
+## The big picture
+
+%%name%% was produced by a generator from a single configuration file, `design-system.config.json`. The configuration describes the brand (colours, fonts, shape), which components to include, and how these docs should look. Everything else is derived from it:
+
+```text
+design-system.config.json
+        │
+        ├── tokens        → src/tokens/tokens.css, tokens.json, tokens.ts
+        ├── components    → src/components/<Name>/<Name>.tsx + .css
+        └── documentation → docs/ (this site)
+```
+
+Because everything comes from one source, the components, tokens and documentation always agree.
+
+## Three layers of tokens
+
+Tokens are organised in layers. Each layer only references the layer below it.
+
+| Layer | Example | Who uses it |
+| --- | --- | --- |
+| Palette | `--%%prefix%%-primary-600` | Semantic tokens, charts, illustrations |
+| Semantic | `--%%prefix%%-color-primary`, `--%%prefix%%-color-text-muted` | Components and your app |
+| Component | `--%%prefix%%-badge-bg` (local, inside a component) | One component only |
+
+Components never use palette colours directly. This is what makes theming and dark mode work: change the semantic layer and every component follows.
+
+**Palettes** are generated in the OKLCH colour space, which is perceptually uniform: steps with the same number have similar lightness across hues, so `success-600` and `danger-600` feel equally strong. Your exact brand colour is kept on the step closest to its lightness.
+
+## Naming conventions
+
+- **Prefix:** every CSS class and custom property starts with `%%prefix%%-`, so the library can live alongside other CSS without clashes.
+- **Classes** follow a BEM-like pattern: `.%%prefix%%-button`, `.%%prefix%%-button--outline` (modifier), `.%%prefix%%-button__icon` (element).
+- **Tokens** are named by role, not by value: `color-text-muted`, not `grey-600`.
+
+## Anatomy of a component
+
+Each component lives in its own folder:
+
+```text
+src/components/Button/
+├── Button.tsx   # React component + typed props, documented with TSDoc
+└── Button.css   # Styles that only use tokens
+```
+
+All components follow the same rules:
+
+1. **Native first.** They render the right native element (`button`, `input`, `dialog`, `fieldset`) to get keyboard support and accessibility for free.
+2. **Prop forwarding.** Unknown props such as `className`, `style`, `id`, `aria-*` and event handlers go to the root or main element.
+3. **Controlled or uncontrolled.** Stateful components accept `value` + `onValueChange` (controlled) or `defaultValue` (uncontrolled).
+4. **Tokens only.** CSS uses `var(--%%prefix%%-…)`. There are no hard-coded colours or sizes.
+
+## How this documentation is built
+
+The docs site in `docs/` is a Vite + React + MDX app that imports the library from source, so it always shows the current code.
+
+- **Props tables, accessibility notes and guidelines** come from component metadata in `docs/src/generated/system.json`.
+- **Live examples** are real components in `docs/src/generated/demos.tsx`. The code shown under each example is the exact code that renders it.
+- **Playgrounds** build controls from each prop's documented type and accepted values.
+- **Guides** like this one are MDX files in `docs/content/`. Edit them freely.
+
+```bash
+npm run docs        # develop the docs with hot reload
+npm run docs:build  # static site in docs/dist (works on any static host)
+```
+
+## Building and publishing
+
+```bash
+npm run build       # dist/index.js, dist/index.d.ts, dist/styles.css, dist/tokens.json
+npm publish
+```
+
+React is a peer dependency and is not bundled. CSS is extracted to a single `styles.css`, so consumers control when styles load.
+
+## Changing the system
+
+You have two options:
+
+- **Regenerate.** Change `design-system.config.json` (or load it into the generator wizard), then generate again. This is best for brand changes such as colours, fonts, radius or density.
+- **Edit by hand.** The output is plain React and CSS with no runtime dependency on the generator. After you edit components by hand, keep the docs metadata in sync, or regeneration will overwrite your edits.
