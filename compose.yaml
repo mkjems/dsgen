@@ -1,0 +1,7 @@
+# Copy of /opt/dsgen/compose.yaml on the VPS.
+services:
+  dsgen:
+    image: ghcr.io/mkjems/dsgen:latest
+    ports:
+      - "127.0.0.1:8085:8080"
+    restart: unless-stopped

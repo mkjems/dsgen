@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "generate": "tsx src/cli/generate.ts",
-    "check:templates": "tsx src/cli/check-templates.ts"
+    "check:templates": "tsx src/cli/check-templates.ts",
+    "check": "npm run typecheck && npm run check:templates"
   },
   "dependencies": {
     "fflate": "^0.8.3",
