@@ -15,8 +15,8 @@ import { Dialog } from '../templates/library/src/components/Dialog/Dialog';
 import { Tooltip } from '../templates/library/src/components/Tooltip/Tooltip';
 import { Spinner } from '../templates/library/src/components/Spinner/Spinner';
 import { Grid, GridItem } from '../templates/library/src/components/Grid/Grid';
-import { Stack } from '../templates/library/src/components/Stack/Stack';
+import { Stack, StackItem } from '../templates/library/src/components/Stack/Stack';
 import { Text } from '../templates/library/src/components/Text/Text';
 
-export const LIB = { Button, TextField, Select, Checkbox, Switch, RadioGroup, Badge, Card, Alert, Avatar, Tabs, Dialog, Tooltip, Spinner, Stack, Grid, GridItem, Text };
-export { Button, TextField, Select, Checkbox, Switch, RadioGroup, Badge, Card, Alert, Avatar, Tabs, Dialog, Tooltip, Spinner, Stack, Grid, GridItem, Text };
+export const LIB = { Button, TextField, Select, Checkbox, Switch, RadioGroup, Badge, Card, Alert, Avatar, Tabs, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };
+export { Button, TextField, Select, Checkbox, Switch, RadioGroup, Badge, Card, Alert, Avatar, Tabs, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };

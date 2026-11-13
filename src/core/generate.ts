@@ -111,6 +111,8 @@ export function generateProject(config: DesignSystemConfig, templates: TemplateS
     `export { tokens } from './tokens/tokens';`,
     `export type { Tokens } from './tokens/tokens';`,
     `export { cx } from './utils/cx';`,
+    `export { breakpoints } from './utils/layout';`,
+    `export type { Breakpoint, Responsive } from './utils/layout';`,
     ``,
   ].join('\n');
 

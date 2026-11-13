@@ -1,1 +1,63 @@
+/*
+ * Stack reads one custom property per breakpoint, set by the component.
+ * Breakpoints (mobile first): sm 0+, md 48em (768px)+, lg 64em (1024px)+.
+ * Keep them in sync with `breakpoints` in utils/layout.ts.
+ * Each property only applies when its modifier class is present, so a prop
+ * that is not set never overrides styles you add through className.
+ */
 .ds-stack { display: flex; min-width: 0; }
+/* Let items shrink below their content width so long text can wrap or truncate. */
+.ds-stack-item { min-width: 0; }
+
+.ds-stack--direction { flex-direction: var(--ds-stack-direction-sm); }
+.ds-stack--row-gap { row-gap: var(--ds-stack-row-gap-sm); }
+.ds-stack--column-gap { column-gap: var(--ds-stack-column-gap-sm); }
+.ds-stack--align { align-items: var(--ds-stack-align-sm); }
+.ds-stack--justify { justify-content: var(--ds-stack-justify-sm); }
+.ds-stack--wrap { flex-wrap: var(--ds-stack-wrap-sm); }
+
+.ds-stack-item--grow { flex-grow: var(--ds-stack-item-grow-sm); }
+.ds-stack-item--shrink { flex-shrink: var(--ds-stack-item-shrink-sm); }
+.ds-stack-item--basis { flex-basis: var(--ds-stack-item-basis-sm); }
+.ds-stack-item--align { align-self: var(--ds-stack-item-align-sm); }
+.ds-stack-item--order { order: var(--ds-stack-item-order-sm); }
+
+@media (width < 48em) {
+  .ds-stack-item--hide-sm { display: none; }
+}
+
+@media (width >= 48em) {
+  .ds-stack--direction { flex-direction: var(--ds-stack-direction-md); }
+  .ds-stack--row-gap { row-gap: var(--ds-stack-row-gap-md); }
+  .ds-stack--column-gap { column-gap: var(--ds-stack-column-gap-md); }
+  .ds-stack--align { align-items: var(--ds-stack-align-md); }
+  .ds-stack--justify { justify-content: var(--ds-stack-justify-md); }
+  .ds-stack--wrap { flex-wrap: var(--ds-stack-wrap-md); }
+
+  .ds-stack-item--grow { flex-grow: var(--ds-stack-item-grow-md); }
+  .ds-stack-item--shrink { flex-shrink: var(--ds-stack-item-shrink-md); }
+  .ds-stack-item--basis { flex-basis: var(--ds-stack-item-basis-md); }
+  .ds-stack-item--align { align-self: var(--ds-stack-item-align-md); }
+  .ds-stack-item--order { order: var(--ds-stack-item-order-md); }
+}
+
+@media (48em <= width < 64em) {
+  .ds-stack-item--hide-md { display: none; }
+}
+
+@media (width >= 64em) {
+  .ds-stack--direction { flex-direction: var(--ds-stack-direction-lg); }
+  .ds-stack--row-gap { row-gap: var(--ds-stack-row-gap-lg); }
+  .ds-stack--column-gap { column-gap: var(--ds-stack-column-gap-lg); }
+  .ds-stack--align { align-items: var(--ds-stack-align-lg); }
+  .ds-stack--justify { justify-content: var(--ds-stack-justify-lg); }
+  .ds-stack--wrap { flex-wrap: var(--ds-stack-wrap-lg); }
+
+  .ds-stack-item--grow { flex-grow: var(--ds-stack-item-grow-lg); }
+  .ds-stack-item--shrink { flex-shrink: var(--ds-stack-item-shrink-lg); }
+  .ds-stack-item--basis { flex-basis: var(--ds-stack-item-basis-lg); }
+  .ds-stack-item--align { align-self: var(--ds-stack-item-align-lg); }
+  .ds-stack-item--order { order: var(--ds-stack-item-order-lg); }
+
+  .ds-stack-item--hide-lg { display: none; }
+}
