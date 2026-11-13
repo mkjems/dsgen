@@ -29,7 +29,7 @@ export function ComponentPage({ component }: { component: ComponentDoc }) {
         <h1>{component.name}</h1>
         <p className="docs-lead">{component.summary}</p>
         <p><InlineMd text={component.description} /></p>
-        <CodeBlock code={`import { ${component.name} } from '${config.identity.packageName}';`} />
+        <CodeBlock code={`import { ${[component.name, ...(component.subcomponents ?? []).map((s) => s.name)].join(', ')} } from '${config.identity.packageName}';`} />
 
         <h2 id="examples">Examples</h2>
         {component.examples.map((ex, i) => (
@@ -46,6 +46,13 @@ export function ComponentPage({ component }: { component: ComponentDoc }) {
 
         <h2 id="props">Props</h2>
         <PropsTable component={component} />
+        {component.subcomponents?.map((sub) => (
+          <section key={sub.name}>
+            <h3 id={`props-${slug(sub.name)}`}><code>{sub.name}</code></h3>
+            <p><InlineMd text={sub.description} /></p>
+            <PropsTable component={sub} />
+          </section>
+        ))}
 
         <h2 id="accessibility">Accessibility</h2>
         <ul className="docs-list">

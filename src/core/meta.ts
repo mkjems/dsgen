@@ -37,6 +37,14 @@ export interface PlaygroundDoc {
   initial: Record<string, string | number | boolean>;
 }
 
+/** A companion component exported from the same file, documented on the same page. */
+export interface SubcomponentDoc {
+  name: string;
+  description: string;
+  extends?: string;
+  props: PropDoc[];
+}
+
 export interface ComponentMeta {
   name: string;
   category: ComponentCategory;
@@ -49,6 +57,8 @@ export interface ComponentMeta {
   /** Native element/props the component forwards remaining props to. */
   extends?: string;
   props: PropDoc[];
+  /** Companion components, e.g. `GridItem` for `Grid`. */
+  subcomponents?: SubcomponentDoc[];
   examples: ExampleDoc[];
   playground?: PlaygroundDoc;
   accessibility: string[];

@@ -25,7 +25,11 @@ const NATIVE = new Set(['children', 'disabled', 'type', 'placeholder', 'required
 for (const meta of CATALOG) {
   const src = templates[`library/src/components/${meta.name}/${meta.name}.tsx`];
   if (!src) { fail(`${meta.name}: missing source`); continue; }
-  const missing = meta.props.filter((p) => !NATIVE.has(p.name) && !new RegExp(`\\b${p.name}\\??:`).test(src));
+  const allProps = [...meta.props, ...(meta.subcomponents ?? []).flatMap((s) => s.props)];
+  const missing = allProps.filter((p) => !NATIVE.has(p.name) && !new RegExp(`\\b${p.name}\\??:`).test(src));
+  for (const sub of meta.subcomponents ?? []) {
+    if (!new RegExp(`export function ${sub.name}\\b`).test(src)) fail(`${meta.name}: subcomponent ${sub.name} not exported from source`);
+  }
   if (missing.length) fail(`${meta.name}: documented props not in source: ${missing.map((p) => p.name).join(', ')}`);
   if (!templates[`library/src/components/${meta.name}/${meta.name}.css`]) fail(`${meta.name}: missing CSS`);
 }
@@ -59,7 +63,7 @@ if (!files['src/tokens/tokens.css'].includes('--zz-color-primary')) fail('tokens
 const small = generateProject({ ...DEFAULT_CONFIG, components: { selected: ['Button'] } }, templates);
 const comps = Object.keys(small.files).filter((p) => p.startsWith('src/components/')).map((p) => p.split('/')[2]);
 const unique = [...new Set(comps)].sort().join(',');
-if (unique !== 'Button,Stack,Text') fail(`Selection not respected: ${unique}`);
+if (unique !== 'Button,Grid,Stack,Text') fail(`Selection not respected: ${unique}`);
 else pass('Only selected + foundation components are generated');
 if (small.notes.length === 0) fail('Expected notes about skipped showcases/examples');
 if (Object.values(validateConfig(DEFAULT_CONFIG)).flat().some((i) => i.severity === 'error')) fail('Default config has errors');

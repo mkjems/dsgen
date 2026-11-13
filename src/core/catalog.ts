@@ -14,12 +14,21 @@ import { meta as Tabs } from '../templates/library/src/components/Tabs/meta';
 import { meta as Dialog } from '../templates/library/src/components/Dialog/meta';
 import { meta as Tooltip } from '../templates/library/src/components/Tooltip/meta';
 import { meta as Spinner } from '../templates/library/src/components/Spinner/meta';
+import { meta as Grid } from '../templates/library/src/components/Grid/meta';
 import { meta as Stack } from '../templates/library/src/components/Stack/meta';
 import { meta as Text } from '../templates/library/src/components/Text/meta';
 
-export const CATALOG: ComponentMeta[] = [Stack, Text, Button, TextField, Select, Checkbox, Switch, RadioGroup, Badge, Card, Alert, Avatar, Tabs, Dialog, Tooltip, Spinner];
+export const CATALOG: ComponentMeta[] = [Stack, Grid, Text, Button, TextField, Select, Checkbox, Switch, RadioGroup, Badge, Card, Alert, Avatar, Tabs, Dialog, Tooltip, Spinner];
 
 export const CATALOG_BY_NAME: Record<string, ComponentMeta> = Object.fromEntries(CATALOG.map((m) => [m.name, m]));
+
+/** Every exported component name (including subcomponents) → its catalog entry's name. */
+export const EXPORT_OWNER: Record<string, string> = Object.fromEntries(
+  CATALOG.flatMap((m) => [[m.name, m.name], ...(m.subcomponents ?? []).map((s) => [s.name, m.name])]),
+);
+
+/** All component names a catalog entry exports. */
+export const exportNames = (m: ComponentMeta) => [m.name, ...(m.subcomponents ?? []).map((s) => s.name)];
 
 export const FOUNDATION_COMPONENTS = CATALOG.filter((m) => m.foundation).map((m) => m.name);
 

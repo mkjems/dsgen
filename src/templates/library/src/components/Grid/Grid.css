@@ -1,0 +1,71 @@
+/*
+ * Grid reads one custom property per breakpoint, set inline by the component.
+ * Breakpoints (mobile first): sm 0+, md 48em (768px)+, lg 64em (1024px)+.
+ * Keep them in sync with `breakpoints` in Grid.tsx.
+ * Each property only applies when its modifier class is present, so a prop
+ * that is not set never overrides styles you add through className.
+ */
+.ds-grid { display: grid; min-width: 0; }
+.ds-grid-item { min-width: 0; }
+
+.ds-grid--columns { grid-template-columns: var(--ds-grid-columns-sm); }
+.ds-grid--rows { grid-template-rows: var(--ds-grid-rows-sm); }
+.ds-grid--areas { grid-template-areas: var(--ds-grid-areas-sm); }
+.ds-grid--row-gap { row-gap: var(--ds-grid-row-gap-sm); }
+.ds-grid--column-gap { column-gap: var(--ds-grid-column-gap-sm); }
+.ds-grid--flow { grid-auto-flow: var(--ds-grid-flow-sm); }
+.ds-grid--auto-rows { grid-auto-rows: var(--ds-grid-auto-rows-sm); }
+.ds-grid--align { align-items: var(--ds-grid-align-sm); }
+.ds-grid--justify { justify-items: var(--ds-grid-justify-sm); }
+
+.ds-grid-item--column { grid-column: var(--ds-grid-item-column-sm); }
+.ds-grid-item--row { grid-row: var(--ds-grid-item-row-sm); }
+.ds-grid-item--align { align-self: var(--ds-grid-item-align-sm); }
+.ds-grid-item--justify { justify-self: var(--ds-grid-item-justify-sm); }
+.ds-grid-item--order { order: var(--ds-grid-item-order-sm); }
+
+@media (width < 48em) {
+  .ds-grid-item--hide-sm { display: none; }
+}
+
+@media (width >= 48em) {
+  .ds-grid--columns { grid-template-columns: var(--ds-grid-columns-md); }
+  .ds-grid--rows { grid-template-rows: var(--ds-grid-rows-md); }
+  .ds-grid--areas { grid-template-areas: var(--ds-grid-areas-md); }
+  .ds-grid--row-gap { row-gap: var(--ds-grid-row-gap-md); }
+  .ds-grid--column-gap { column-gap: var(--ds-grid-column-gap-md); }
+  .ds-grid--flow { grid-auto-flow: var(--ds-grid-flow-md); }
+  .ds-grid--auto-rows { grid-auto-rows: var(--ds-grid-auto-rows-md); }
+  .ds-grid--align { align-items: var(--ds-grid-align-md); }
+  .ds-grid--justify { justify-items: var(--ds-grid-justify-md); }
+
+  .ds-grid-item--column { grid-column: var(--ds-grid-item-column-md); }
+  .ds-grid-item--row { grid-row: var(--ds-grid-item-row-md); }
+  .ds-grid-item--align { align-self: var(--ds-grid-item-align-md); }
+  .ds-grid-item--justify { justify-self: var(--ds-grid-item-justify-md); }
+  .ds-grid-item--order { order: var(--ds-grid-item-order-md); }
+}
+
+@media (48em <= width < 64em) {
+  .ds-grid-item--hide-md { display: none; }
+}
+
+@media (width >= 64em) {
+  .ds-grid--columns { grid-template-columns: var(--ds-grid-columns-lg); }
+  .ds-grid--rows { grid-template-rows: var(--ds-grid-rows-lg); }
+  .ds-grid--areas { grid-template-areas: var(--ds-grid-areas-lg); }
+  .ds-grid--row-gap { row-gap: var(--ds-grid-row-gap-lg); }
+  .ds-grid--column-gap { column-gap: var(--ds-grid-column-gap-lg); }
+  .ds-grid--flow { grid-auto-flow: var(--ds-grid-flow-lg); }
+  .ds-grid--auto-rows { grid-auto-rows: var(--ds-grid-auto-rows-lg); }
+  .ds-grid--align { align-items: var(--ds-grid-align-lg); }
+  .ds-grid--justify { justify-items: var(--ds-grid-justify-lg); }
+
+  .ds-grid-item--column { grid-column: var(--ds-grid-item-column-lg); }
+  .ds-grid-item--row { grid-row: var(--ds-grid-item-row-lg); }
+  .ds-grid-item--align { align-self: var(--ds-grid-item-align-lg); }
+  .ds-grid-item--justify { justify-self: var(--ds-grid-item-justify-lg); }
+  .ds-grid-item--order { order: var(--ds-grid-item-order-lg); }
+
+  .ds-grid-item--hide-lg { display: none; }
+}

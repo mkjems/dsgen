@@ -24,6 +24,7 @@ export interface ComponentDoc {
   foundation?: boolean;
   extends?: string;
   props: PropDoc[];
+  subcomponents?: { name: string; description: string; extends?: string; props: PropDoc[] }[];
   examples: ExampleDoc[];
   playground?: { template: string; initial: Record<string, string | number | boolean> };
   accessibility: string[];

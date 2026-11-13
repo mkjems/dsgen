@@ -6,7 +6,7 @@
  */
 import type { DesignSystemConfig } from './config';
 import { SHOWCASES, googleFontsUrl } from './config';
-import { CATALOG, resolveComponents } from './catalog';
+import { EXPORT_OWNER, exportNames, resolveComponents } from './catalog';
 import type { ComponentMeta, ExampleDoc } from './meta';
 import { buildTokens, tokensToCss, tokensToJson, tokensToTs } from './tokens';
 import { VERSIONS } from './versions';
@@ -34,11 +34,11 @@ function fillPlaceholders(source: string, values: Record<string, string>): strin
   return source.replace(/%%(\w+)%%/g, (m, key: string) => (key in values ? values[key] : m));
 }
 
-/** Names of catalog components referenced as JSX tags in a snippet. */
+/** Names of catalog components referenced as JSX tags in a snippet (subcomponents map to their owner). */
 export function componentsUsedIn(code: string): string[] {
   const names = new Set<string>();
-  for (const m of code.matchAll(/<([A-Z][A-Za-z]+)/g)) names.add(m[1]);
-  return [...names].filter((n) => CATALOG.some((c) => c.name === n));
+  for (const m of code.matchAll(/<([A-Z][A-Za-z]+)/g)) if (EXPORT_OWNER[m[1]]) names.add(EXPORT_OWNER[m[1]]);
+  return [...names];
 }
 
 /** True when the example is a `function Demo()` component rather than a JSX expression. */
@@ -311,7 +311,7 @@ function docsComponent(
 }
 
 function demosModule(components: ComponentMeta[], docs: DocsComponent[]): string {
-  const names = components.map((c) => c.name);
+  const names = components.flatMap(exportNames);
   const lines: string[] = [
     `// Generated: live renderers for every documented example and playground.`,
     `// Each example's source is also stored as a string in system.json for display.`,

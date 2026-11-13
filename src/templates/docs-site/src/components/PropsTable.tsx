@@ -1,7 +1,7 @@
-import type { ComponentDoc } from '../types';
+import type { PropDoc } from '../types';
 import { InlineMd } from './InlineMd';
 
-export function PropsTable({ component }: { component: ComponentDoc }) {
+export function PropsTable({ component }: { component: { props: PropDoc[]; extends?: string } }) {
   return (
     <div className="docs-table-wrap">
       <table className="docs-table docs-props">
