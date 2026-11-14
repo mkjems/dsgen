@@ -2,7 +2,7 @@
 import '../templates/library/src/styles/base.css';
 import { Button } from '../templates/library/src/components/Button/Button';
 import { TextField } from '../templates/library/src/components/TextField/TextField';
-import { Select } from '../templates/library/src/components/Select/Select';
+import { Select, SelectItem } from '../templates/library/src/components/Select/Select';
 import { Checkbox } from '../templates/library/src/components/Checkbox/Checkbox';
 import { Switch } from '../templates/library/src/components/Switch/Switch';
 import { RadioGroup } from '../templates/library/src/components/RadioGroup/RadioGroup';
@@ -18,5 +18,5 @@ import { Grid, GridItem } from '../templates/library/src/components/Grid/Grid';
 import { Stack, StackItem } from '../templates/library/src/components/Stack/Stack';
 import { Text } from '../templates/library/src/components/Text/Text';
 
-export const LIB = { Button, TextField, Select, Checkbox, Switch, RadioGroup, Badge, Card, CardHeader, CardTitle, CardDescription, CardActions, CardFooter, Alert, Avatar, Tabs, TabList, Tab, TabPanel, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };
-export { Button, TextField, Select, Checkbox, Switch, RadioGroup, Badge, Card, CardHeader, CardTitle, CardDescription, CardActions, CardFooter, Alert, Avatar, Tabs, TabList, Tab, TabPanel, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };
+export const LIB = { Button, TextField, Select, SelectItem, Checkbox, Switch, RadioGroup, Badge, Card, CardHeader, CardTitle, CardDescription, CardActions, CardFooter, Alert, Avatar, Tabs, TabList, Tab, TabPanel, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };
+export { Button, TextField, Select, SelectItem, Checkbox, Switch, RadioGroup, Badge, Card, CardHeader, CardTitle, CardDescription, CardActions, CardFooter, Alert, Avatar, Tabs, TabList, Tab, TabPanel, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };

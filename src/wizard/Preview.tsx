@@ -5,7 +5,7 @@ import { resolveComponents } from '../core/catalog';
 import { buildTokens, tokensToCss, type TokenSet } from '../core/tokens';
 import { exampleComponent, SafeRender } from './runtime';
 import {
-  Alert, Avatar, Badge, Button, Card, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Select, Stack, Switch,
+  Alert, Avatar, Badge, Button, Card, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Select, SelectItem, Stack, Switch,
   Tab, TabList, TabPanel, Tabs, Text, TextField,
 } from './lib';
 import type { StepId } from './state';
@@ -71,7 +71,11 @@ function SampleScreen({ config }: { config: DesignSystemConfig }) {
         </CardHeader>
         <Stack gap={4}>
           <TextField label="Project name" placeholder="e.g. Website relaunch" hint="You can change this later." />
-          <Select label="Visibility" defaultValue="team" options={[{ value: 'team', label: 'Team' }, { value: 'private', label: 'Private' }, { value: 'public', label: 'Public' }]} />
+          <Select label="Visibility" defaultValue="team">
+            <SelectItem value="team">Team</SelectItem>
+            <SelectItem value="private">Private</SelectItem>
+            <SelectItem value="public">Public</SelectItem>
+          </Select>
           <Switch label="Notify members" description="Send an email to everyone on the team." defaultChecked />
           <Checkbox label="Use a template" />
         </Stack>

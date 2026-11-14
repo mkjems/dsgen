@@ -2,17 +2,22 @@ import { useId, type ComponentPropsWithRef, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 import './Select.css';
 
-export interface SelectOption {
-  value: string;
-  label: string;
-  disabled?: boolean;
-}
+/*
+ * Select is a styled native <select>, composed from its options:
+ *
+ *   <Select label="Country" placeholder="Choose a country">
+ *     <SelectItem value="dk">Denmark</SelectItem>
+ *     <SelectItem value="se">Sweden</SelectItem>
+ *   </Select>
+ *
+ * SelectItem renders a plain <option>, so keyboard support, mobile pickers, autofill and form
+ * submission all stay native. Because <select> only accepts <option> children, nothing may wrap
+ * a SelectItem in an element.
+ */
 
 export interface SelectProps extends Omit<ComponentPropsWithRef<'select'>, 'size'> {
   /** Visible label. */
   label: string;
-  /** The options to choose from. */
-  options: SelectOption[];
   /** Text of an empty first option shown before a choice is made. */
   placeholder?: string;
   /** Helper text shown below the select. */
@@ -27,7 +32,6 @@ export interface SelectProps extends Omit<ComponentPropsWithRef<'select'>, 'size
 
 export function Select({
   label,
-  options,
   placeholder,
   hint,
   error,
@@ -36,6 +40,7 @@ export function Select({
   id,
   required,
   className,
+  children,
   ...rest
 }: SelectProps) {
   const autoId = useId();
@@ -63,11 +68,7 @@ export function Select({
               {placeholder}
             </option>
           )}
-          {options.map((o) => (
-            <option key={o.value} value={o.value} disabled={o.disabled}>
-              {o.label}
-            </option>
-          ))}
+          {children}
         </select>
         <svg className="ds-select__chevron" viewBox="0 0 16 16" aria-hidden="true">
           <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -80,4 +81,14 @@ export function Select({
       ) : null}
     </div>
   );
+}
+
+export interface SelectItemProps extends Omit<ComponentPropsWithRef<'option'>, 'value'> {
+  /** The value submitted, and matched by the Select's `value`/`defaultValue`. */
+  value: string;
+}
+
+/** One choice in a Select. Its children are the visible label. */
+export function SelectItem(props: SelectItemProps) {
+  return <option {...props} />;
 }

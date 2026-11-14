@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Button, Card, CardDescription, CardFooter, CardHeader, CardTitle, Dialog, RadioGroup, Select, Stack, Switch,
+  Button, Card, CardDescription, CardFooter, CardHeader, CardTitle, Dialog, RadioGroup, Select, SelectItem, Stack, Switch,
   Tab, TabList, TabPanel, Tabs, Text,
 } from '@lib';
 
@@ -31,9 +31,16 @@ export default function Settings() {
         <CardTitle>Preferences</CardTitle>
       </CardHeader>
       <Stack gap={4}>
-        <Select label="Language" defaultValue="en" options={[{ value: 'en', label: 'English' }, { value: 'da', label: 'Dansk' }, { value: 'de', label: 'Deutsch' }]} />
-        <Select label="Time zone" defaultValue="cet" hint="Used for reminders and reports."
-          options={[{ value: 'utc', label: 'UTC' }, { value: 'cet', label: 'Central European Time' }, { value: 'pst', label: 'Pacific Time' }]} />
+        <Select label="Language" defaultValue="en">
+          <SelectItem value="en">English</SelectItem>
+          <SelectItem value="da">Dansk</SelectItem>
+          <SelectItem value="de">Deutsch</SelectItem>
+        </Select>
+        <Select label="Time zone" defaultValue="cet" hint="Used for reminders and reports.">
+          <SelectItem value="utc">UTC</SelectItem>
+          <SelectItem value="cet">Central European Time</SelectItem>
+          <SelectItem value="pst">Pacific Time</SelectItem>
+        </Select>
       </Stack>
       <CardFooter>
         <Button>Save preferences</Button>

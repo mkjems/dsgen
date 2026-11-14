@@ -5,11 +5,10 @@ export const meta: ComponentMeta = {
   category: 'Forms',
   summary: 'Lets users choose one option from a list.',
   description:
-    'Select is a styled native `<select>`, which gives you robust keyboard support, mobile pickers and form integration for free. Pass options as an array of `{ value, label, disabled? }` objects.',
+    'Select is a styled native `<select>`, which gives you robust keyboard support, mobile pickers and form integration for free. Its options are `SelectItem` children; each renders a native `<option>`.',
   extends: '<select> attributes (except `size`)',
   props: [
     { name: 'label', type: 'string', required: true, control: 'text', description: 'Visible label linked to the select.' },
-    { name: 'options', type: 'SelectOption[]', required: true, description: 'Array of `{ value: string; label: string; disabled?: boolean }`. Values must be unique.' },
     { name: 'placeholder', type: 'string', control: 'text', description: 'Adds an empty, disabled first option (e.g. "Choose a country") that is selected until the user picks a value.' },
     { name: 'hint', type: 'ReactNode', control: 'text', description: 'Helper text below the select.' },
     { name: 'error', type: 'ReactNode', control: 'text', description: 'Validation message; sets `aria-invalid`.' },
@@ -17,14 +16,27 @@ export const meta: ComponentMeta = {
     { name: 'hideLabel', type: 'boolean', default: 'false', control: 'boolean', description: 'Visually hides the label.' },
     { name: 'disabled', type: 'boolean', default: 'false', control: 'boolean', description: 'Disables the select.' },
     { name: 'value / onChange', type: 'string / ChangeEventHandler', description: 'Use for a controlled select, or `defaultValue` for uncontrolled.' },
+    { name: 'children', type: 'ReactNode', description: 'The `SelectItem`s. Values must be unique.' },
+  ],
+  subcomponents: [
+    {
+      name: 'SelectItem',
+      description: 'One choice. Renders a native `<option>`, so it must be a direct child of `Select` with nothing wrapped around it.',
+      extends: '<option> attributes',
+      props: [
+        { name: 'value', type: 'string', required: true, control: 'text', description: 'The value submitted, and matched by the Select’s `value`/`defaultValue`.' },
+        { name: 'disabled', type: 'boolean', default: 'false', control: 'boolean', description: 'Shown but not selectable.' },
+        { name: 'children', type: 'string', control: 'text', description: 'The visible label. Plain text only: `<option>` cannot hold elements.' },
+      ],
+    },
   ],
   examples: [
-    { title: 'Basic', code: `<Select\n  label="Country"\n  placeholder="Choose a country"\n  options={[\n    { value: 'dk', label: 'Denmark' },\n    { value: 'se', label: 'Sweden' },\n    { value: 'no', label: 'Norway' },\n  ]}\n/>` },
-    { title: 'Controlled', code: `function Demo() {\n  const [role, setRole] = useState('editor');\n  return (\n    <Stack gap={2}>\n      <Select\n        label="Role"\n        value={role}\n        onChange={(e) => setRole(e.target.value)}\n        options={[\n          { value: 'viewer', label: 'Viewer' },\n          { value: 'editor', label: 'Editor' },\n          { value: 'owner', label: 'Owner', disabled: true },\n        ]}\n      />\n      <Text variant="small" tone="muted">Selected: {role}</Text>\n    </Stack>\n  );\n}` },
-    { title: 'Error', code: `<Select label="Plan" placeholder="Select a plan" error="Please choose a plan." options={[{ value: 'free', label: 'Free' }, { value: 'pro', label: 'Pro' }]} />` },
+    { title: 'Basic', code: `<Select label="Country" placeholder="Choose a country">\n  <SelectItem value="dk">Denmark</SelectItem>\n  <SelectItem value="se">Sweden</SelectItem>\n  <SelectItem value="no">Norway</SelectItem>\n</Select>` },
+    { title: 'Controlled', code: `function Demo() {\n  const [role, setRole] = useState('editor');\n  return (\n    <Stack gap={2}>\n      <Select label="Role" value={role} onChange={(e) => setRole(e.target.value)}>\n        <SelectItem value="viewer">Viewer</SelectItem>\n        <SelectItem value="editor">Editor</SelectItem>\n        <SelectItem value="owner" disabled>Owner</SelectItem>\n      </Select>\n      <Text variant="small" tone="muted">Selected: {role}</Text>\n    </Stack>\n  );\n}` },
+    { title: 'Error', code: `<Select label="Plan" placeholder="Select a plan" error="Please choose a plan.">\n  <SelectItem value="free">Free</SelectItem>\n  <SelectItem value="pro">Pro</SelectItem>\n</Select>` },
   ],
   playground: {
-    template: `<Select {...props} options={[{ value: 'a', label: 'Option A' }, { value: 'b', label: 'Option B' }, { value: 'c', label: 'Option C' }]} />`,
+    template: `<Select {...props}>\n  <SelectItem value="a">Option A</SelectItem>\n  <SelectItem value="b">Option B</SelectItem>\n  <SelectItem value="c">Option C</SelectItem>\n</Select>`,
     initial: { label: 'Choose an option', placeholder: 'Select…', hint: '', error: '', size: 'md', disabled: false, hideLabel: false },
   },
   accessibility: [
