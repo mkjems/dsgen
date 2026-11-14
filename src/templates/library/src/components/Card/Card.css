@@ -24,18 +24,25 @@
 .ds-card--interactive:hover { border-color: var(--ds-color-border-strong); box-shadow: var(--ds-shadow-lg); transform: translateY(-1px); }
 .ds-card--interactive:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-color-focus-ring); outline-offset: 2px; }
 
-.ds-card__header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--ds-space-4); }
-.ds-card__heading { display: flex; flex-direction: column; gap: var(--ds-space-1); min-width: 0; }
+/* The header is a two-column grid: title and description on the left, actions on the right.
+   Each part places itself, so the layout holds even if something wraps the parts. */
+.ds-card__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--ds-space-4);
+  row-gap: var(--ds-space-1);
+  align-items: start;
+}
 .ds-card__title {
+  grid-column: 1;
   margin: 0;
   font-family: var(--ds-font-heading);
   font-size: var(--ds-font-size-lg);
   font-weight: var(--ds-font-weight-heading);
   line-height: var(--ds-line-height-heading);
 }
-.ds-card__description { margin: 0; font-size: var(--ds-font-size-sm); color: var(--ds-color-text-muted); }
-.ds-card__actions { display: flex; gap: var(--ds-space-2); flex-shrink: 0; }
-.ds-card__body { min-width: 0; }
+.ds-card__description { grid-column: 1; margin: 0; font-size: var(--ds-font-size-sm); color: var(--ds-color-text-muted); }
+.ds-card__actions { grid-column: 2; grid-row: 1; display: flex; gap: var(--ds-space-2); }
 .ds-card__footer {
   display: flex;
   justify-content: flex-end;

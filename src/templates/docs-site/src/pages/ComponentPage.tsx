@@ -50,6 +50,7 @@ export function ComponentPage({ component }: { component: ComponentDoc }) {
           <section key={sub.name}>
             <h3 id={`props-${slug(sub.name)}`}><code>{sub.name}</code></h3>
             <p><InlineMd text={sub.description} /></p>
+            <p className="docs-muted">Place inside <code>{sub.parent ?? component.name}</code>.</p>
             <PropsTable component={sub} />
           </section>
         ))}

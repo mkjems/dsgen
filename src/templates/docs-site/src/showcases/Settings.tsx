@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { Button, Card, Dialog, RadioGroup, Select, Stack, Switch, Tabs, Text } from '@lib';
+import {
+  Button, Card, CardDescription, CardFooter, CardHeader, CardTitle, Dialog, RadioGroup, Select, Stack, Switch,
+  Tab, TabList, TabPanel, Tabs, Text,
+} from '@lib';
 
 /** A settings screen with tabs, toggles and a destructive confirmation. */
 export default function Settings() {
@@ -7,7 +10,11 @@ export default function Settings() {
   const [deleted, setDeleted] = useState(false);
 
   const notifications = (
-    <Card title="Notifications" description="Choose what we email you about.">
+    <Card>
+      <CardHeader>
+        <CardTitle>Notifications</CardTitle>
+        <CardDescription>Choose what we email you about.</CardDescription>
+      </CardHeader>
       <Stack gap={4}>
         <Switch label="Product updates" description="New features and improvements." labelPosition="start" defaultChecked />
         <Switch label="Security alerts" description="Sign-ins from new devices." labelPosition="start" defaultChecked />
@@ -19,21 +26,33 @@ export default function Settings() {
   );
 
   const preferences = (
-    <Card title="Preferences" footer={<Button>Save preferences</Button>}>
+    <Card>
+      <CardHeader>
+        <CardTitle>Preferences</CardTitle>
+      </CardHeader>
       <Stack gap={4}>
         <Select label="Language" defaultValue="en" options={[{ value: 'en', label: 'English' }, { value: 'da', label: 'Dansk' }, { value: 'de', label: 'Deutsch' }]} />
         <Select label="Time zone" defaultValue="cet" hint="Used for reminders and reports."
           options={[{ value: 'utc', label: 'UTC' }, { value: 'cet', label: 'Central European Time' }, { value: 'pst', label: 'Pacific Time' }]} />
       </Stack>
+      <CardFooter>
+        <Button>Save preferences</Button>
+      </CardFooter>
     </Card>
   );
 
   const danger = (
-    <Card title="Delete workspace" description="Permanently remove this workspace and all of its data.">
+    <Card>
+      <CardHeader>
+        <CardTitle>Delete workspace</CardTitle>
+        <CardDescription>Permanently remove this workspace and all of its data.</CardDescription>
+      </CardHeader>
       {deleted ? (
         <Text tone="danger">Workspace scheduled for deletion. (Demo — nothing was deleted.)</Text>
       ) : (
-        <Button variant="danger" onClick={() => setConfirmOpen(true)}>Delete workspace</Button>
+        <Stack direction="row">
+          <Button variant="danger" onClick={() => setConfirmOpen(true)}>Delete workspace</Button>
+        </Stack>
       )}
     </Card>
   );
@@ -44,11 +63,16 @@ export default function Settings() {
         <Text variant="h3">Settings</Text>
         <Text tone="muted">Manage your workspace preferences.</Text>
       </Stack>
-      <Tabs aria-label="Settings sections" items={[
-        { id: 'notifications', label: 'Notifications', content: notifications },
-        { id: 'preferences', label: 'Preferences', content: preferences },
-        { id: 'danger', label: 'Danger zone', content: danger },
-      ]} />
+      <Tabs>
+        <TabList aria-label="Settings sections">
+          <Tab value="notifications">Notifications</Tab>
+          <Tab value="preferences">Preferences</Tab>
+          <Tab value="danger">Danger zone</Tab>
+        </TabList>
+        <TabPanel value="notifications">{notifications}</TabPanel>
+        <TabPanel value="preferences">{preferences}</TabPanel>
+        <TabPanel value="danger">{danger}</TabPanel>
+      </Tabs>
       <Dialog
         open={confirmOpen}
         onClose={() => setConfirmOpen(false)}

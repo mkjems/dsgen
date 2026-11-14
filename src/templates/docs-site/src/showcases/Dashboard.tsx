@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Avatar, Badge, Button, Card, Spinner, Stack, Text, Tooltip } from '@lib';
+import { Avatar, Badge, Button, Card, CardActions, CardDescription, CardHeader, CardTitle, Spinner, Stack, Text, Tooltip } from '@lib';
 
 const MEMBERS = [
   { name: 'Ada Lovelace', role: 'Engineering lead', status: 'online' as const, tasks: 12 },
@@ -46,7 +46,14 @@ export default function Dashboard() {
       </div>
 
       <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
-        <Card title="Members" description="Who is working on what" actions={<Button size="sm" variant="ghost">Invite</Button>}>
+        <Card>
+          <CardHeader>
+            <CardTitle>Members</CardTitle>
+            <CardDescription>Who is working on what</CardDescription>
+            <CardActions>
+              <Button size="sm" variant="ghost">Invite</Button>
+            </CardActions>
+          </CardHeader>
           {loading ? (
             <Stack direction="row" gap={2}><Spinner size="sm" label="Loading members" /><Text tone="muted">Loading members…</Text></Stack>
           ) : (
@@ -69,7 +76,11 @@ export default function Dashboard() {
           )}
         </Card>
 
-        <Card title="Service status" description="Updated a minute ago">
+        <Card>
+          <CardHeader>
+            <CardTitle>Service status</CardTitle>
+            <CardDescription>Updated a minute ago</CardDescription>
+          </CardHeader>
           <Stack gap={3}>
             {SERVICES.map((s) => (
               <Stack key={s.name} direction="row" justify="between">

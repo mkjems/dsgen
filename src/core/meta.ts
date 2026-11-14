@@ -42,6 +42,11 @@ export interface SubcomponentDoc {
   name: string;
   description: string;
   extends?: string;
+  /**
+   * The component this part must be placed directly inside, e.g. `CardTitle` → `CardHeader`.
+   * Defaults to the owning component. Read by docs and by visual editors to validate placement.
+   */
+  parent?: string;
   props: PropDoc[];
 }
 

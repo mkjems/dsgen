@@ -27,8 +27,10 @@ for (const meta of CATALOG) {
   if (!src) { fail(`${meta.name}: missing source`); continue; }
   const allProps = [...meta.props, ...(meta.subcomponents ?? []).flatMap((s) => s.props)];
   const missing = allProps.filter((p) => !NATIVE.has(p.name) && !new RegExp(`\\b${p.name}\\??:`).test(src));
+  const parts = new Set([meta.name, ...(meta.subcomponents ?? []).map((s) => s.name)]);
   for (const sub of meta.subcomponents ?? []) {
     if (!new RegExp(`export function ${sub.name}\\b`).test(src)) fail(`${meta.name}: subcomponent ${sub.name} not exported from source`);
+    if (sub.parent && !parts.has(sub.parent)) fail(`${meta.name}: ${sub.name}.parent "${sub.parent}" is not a part of ${meta.name}`);
   }
   if (missing.length) fail(`${meta.name}: documented props not in source: ${missing.map((p) => p.name).join(', ')}`);
   if (!templates[`library/src/components/${meta.name}/${meta.name}.css`]) fail(`${meta.name}: missing CSS`);

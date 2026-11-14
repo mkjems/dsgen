@@ -4,7 +4,10 @@ import { googleFontsUrl, SHOWCASES } from '../core/config';
 import { resolveComponents } from '../core/catalog';
 import { buildTokens, tokensToCss, type TokenSet } from '../core/tokens';
 import { exampleComponent, SafeRender } from './runtime';
-import { Alert, Avatar, Badge, Button, Card, Checkbox, Select, Stack, Switch, Tabs, Text, TextField } from './lib';
+import {
+  Alert, Avatar, Badge, Button, Card, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Select, Stack, Switch,
+  Tab, TabList, TabPanel, Tabs, Text, TextField,
+} from './lib';
 import type { StepId } from './state';
 
 function useGoogleFonts(url: string | null) {
@@ -61,14 +64,21 @@ function SampleScreen({ config }: { config: DesignSystemConfig }) {
           <Avatar name="Ada Lovelace" size="sm" status="online" />
         </Stack>
       </Stack>
-      <Card title="Create a project" description="Projects group your team’s work." variant="elevated"
-        footer={<><Button variant="outline">Cancel</Button><Button>Create project</Button></>}>
+      <Card variant="elevated">
+        <CardHeader>
+          <CardTitle>Create a project</CardTitle>
+          <CardDescription>Projects group your team’s work.</CardDescription>
+        </CardHeader>
         <Stack gap={4}>
           <TextField label="Project name" placeholder="e.g. Website relaunch" hint="You can change this later." />
           <Select label="Visibility" defaultValue="team" options={[{ value: 'team', label: 'Team' }, { value: 'private', label: 'Private' }, { value: 'public', label: 'Public' }]} />
           <Switch label="Notify members" description="Send an email to everyone on the team." defaultChecked />
           <Checkbox label="Use a template" />
         </Stack>
+        <CardFooter>
+          <Button variant="outline">Cancel</Button>
+          <Button>Create project</Button>
+        </CardFooter>
       </Card>
       <Alert tone="info" title="Tip">Press <Text as="kbd" variant="code">N</Text> anywhere to start a new project.</Alert>
     </Stack>
@@ -94,7 +104,11 @@ function Palettes({ tokens }: { tokens: TokenSet }) {
 
 function ContrastList({ tokens }: { tokens: TokenSet }) {
   return (
-    <Card title="Contrast checks" description="WCAG 2 ratios for key pairs" padding="sm">
+    <Card padding="sm">
+      <CardHeader>
+        <CardTitle>Contrast checks</CardTitle>
+        <CardDescription>WCAG 2 ratios for key pairs</CardDescription>
+      </CardHeader>
       <Stack gap={2}>
         {tokens.contrastChecks.map((c) => (
           <Stack key={c.label + c.theme} direction="row" justify="between" gap={3}>
@@ -145,7 +159,14 @@ function ShapeSample() {
         <Card padding="sm" variant="elevated">Elevated</Card>
         <Card padding="sm" variant="filled">Filled</Card>
       </div>
-      <Tabs variant="pill" items={[{ id: 'a', label: 'Overview', content: <Text tone="muted">Spacing, radius and shadows all come from tokens.</Text> }, { id: 'b', label: 'Activity', content: <Text>Activity</Text> }]} />
+      <Tabs variant="pill">
+        <TabList aria-label="Preview">
+          <Tab value="a">Overview</Tab>
+          <Tab value="b">Activity</Tab>
+        </TabList>
+        <TabPanel value="a"><Text tone="muted">Spacing, radius and shadows all come from tokens.</Text></TabPanel>
+        <TabPanel value="b"><Text>Activity</Text></TabPanel>
+      </Tabs>
     </Stack>
   );
 }
@@ -198,7 +219,11 @@ function DocsMock({ config }: { config: DesignSystemConfig }) {
           <Button size="sm">Get started</Button>
           <Button size="sm" variant="outline">Browse components</Button>
         </Stack>
-        <Card padding="sm" title="Button" description="Props · Examples · Playground · Accessibility">
+        <Card padding="sm">
+          <CardHeader>
+            <CardTitle>Button</CardTitle>
+            <CardDescription>Props · Examples · Playground · Accessibility</CardDescription>
+          </CardHeader>
           <Stack direction="row" gap={2}>
             <Button size="sm">Solid</Button>
             <Button size="sm" variant="outline">Outline</Button>
