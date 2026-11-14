@@ -1,19 +1,33 @@
-import { useId, useState, type ReactNode } from 'react';
+import { createContext, use, useId, useMemo, useState, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 import './RadioGroup.css';
 
-export interface RadioOption {
-  value: string;
-  label: ReactNode;
-  description?: ReactNode;
-  disabled?: boolean;
+/*
+ * RadioGroup is composed from its items:
+ *
+ *   <RadioGroup label="Plan" defaultValue="pro">
+ *     <RadioGroupItem value="free">Free</RadioGroupItem>
+ *     <RadioGroupItem value="pro" description="Unlimited projects.">Pro</RadioGroupItem>
+ *   </RadioGroup>
+ *
+ * The items share the group's state through context and render native radio inputs with a shared
+ * `name`, so arrow-key navigation and form submission come from the browser. No part inspects its
+ * children, so items keep working when other elements sit between them.
+ */
+
+interface RadioGroupContextValue {
+  name: string;
+  selected: string | undefined;
+  disabled: boolean;
+  required: boolean | undefined;
+  select: (value: string) => void;
 }
+
+const RadioGroupContext = createContext<RadioGroupContextValue | null>(null);
 
 export interface RadioGroupProps {
   /** Group label, rendered as a `<legend>`. */
   label: string;
-  /** The choices. */
-  options: RadioOption[];
   /** Controlled selected value. */
   value?: string;
   /** Initial value when uncontrolled. */
@@ -31,11 +45,12 @@ export interface RadioGroupProps {
   /** Mark the group as required. */
   required?: boolean;
   className?: string;
+  /** The `RadioGroupItem`s. */
+  children?: ReactNode;
 }
 
 export function RadioGroup({
   label,
-  options,
   value,
   defaultValue,
   onValueChange,
@@ -45,16 +60,27 @@ export function RadioGroup({
   error,
   required,
   className,
+  children,
 }: RadioGroupProps) {
   const autoId = useId();
   const groupName = name ?? autoId;
   const [internal, setInternal] = useState(defaultValue);
-  const selected = value !== undefined ? value : internal;
+  const controlled = value !== undefined;
+  const selected = controlled ? value : internal;
 
-  const select = (v: string) => {
-    if (value === undefined) setInternal(v);
-    onValueChange?.(v);
-  };
+  const ctx = useMemo<RadioGroupContextValue>(
+    () => ({
+      name: groupName,
+      selected,
+      disabled,
+      required,
+      select: (next) => {
+        if (!controlled) setInternal(next);
+        onValueChange?.(next);
+      },
+    }),
+    [groupName, selected, disabled, required, controlled, onValueChange],
+  );
 
   return (
     <fieldset
@@ -67,32 +93,49 @@ export function RadioGroup({
         {label}
         {required && <span className="ds-field__required" aria-hidden="true">*</span>}
       </legend>
-      <div className="ds-radiogroup__options">
-        {options.map((o) => {
-          const id = `${autoId}-${o.value}`;
-          return (
-            <div key={o.value} className={cx('ds-radio', (disabled || o.disabled) && 'ds-radio--disabled')}>
-              <input
-                id={id}
-                type="radio"
-                className="ds-radio__input"
-                name={groupName}
-                value={o.value}
-                checked={selected === o.value}
-                disabled={o.disabled}
-                required={required}
-                onChange={() => select(o.value)}
-              />
-              <span className="ds-radio__dot" aria-hidden="true" />
-              <span className="ds-radio__text">
-                <label htmlFor={id} className="ds-radio__label">{o.label}</label>
-                {o.description && <span className="ds-radio__description">{o.description}</span>}
-              </span>
-            </div>
-          );
-        })}
-      </div>
+      <RadioGroupContext value={ctx}>
+        <div className="ds-radiogroup__options">{children}</div>
+      </RadioGroupContext>
       {error && <p id={`${autoId}-error`} className="ds-field__error" role="alert">{error}</p>}
     </fieldset>
+  );
+}
+
+export interface RadioGroupItemProps {
+  /** The value submitted and passed to `onValueChange` when this option is chosen. */
+  value: string;
+  /** Supporting text under the label. */
+  description?: ReactNode;
+  /** Shown but not selectable. */
+  disabled?: boolean;
+  className?: string;
+  /** The label. */
+  children?: ReactNode;
+}
+
+/** One option in a RadioGroup. Its children are the label. */
+export function RadioGroupItem({ value, description, disabled = false, className, children }: RadioGroupItemProps) {
+  const ctx = use(RadioGroupContext);
+  if (!ctx) throw new Error('<RadioGroupItem> must be used inside <RadioGroup>.');
+  const id = useId();
+  return (
+    <div className={cx('ds-radio', (ctx.disabled || disabled) && 'ds-radio--disabled', className)}>
+      <input
+        id={id}
+        type="radio"
+        className="ds-radio__input"
+        name={ctx.name}
+        value={value}
+        checked={ctx.selected === value}
+        disabled={disabled}
+        required={ctx.required}
+        onChange={() => ctx.select(value)}
+      />
+      <span className="ds-radio__dot" aria-hidden="true" />
+      <span className="ds-radio__text">
+        <label htmlFor={id} className="ds-radio__label">{children}</label>
+        {description && <span className="ds-radio__description">{description}</span>}
+      </span>
+    </div>
   );
 }

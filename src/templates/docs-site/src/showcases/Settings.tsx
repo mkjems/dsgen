@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Button, Card, CardDescription, CardFooter, CardHeader, CardTitle, Dialog, RadioGroup, Select, SelectItem, Stack, Switch,
+  Button, Card, CardDescription, CardFooter, CardHeader, CardTitle, Dialog, RadioGroup, RadioGroupItem, Select, SelectItem, Stack, Switch,
   Tab, TabList, TabPanel, Tabs, Text,
 } from '@lib';
 
@@ -19,8 +19,11 @@ export default function Settings() {
         <Switch label="Product updates" description="New features and improvements." labelPosition="start" defaultChecked />
         <Switch label="Security alerts" description="Sign-ins from new devices." labelPosition="start" defaultChecked />
         <Switch label="Weekly summary" description="A digest of your team's activity." labelPosition="start" />
-        <RadioGroup label="Digest frequency" orientation="horizontal" defaultValue="weekly"
-          options={[{ value: 'daily', label: 'Daily' }, { value: 'weekly', label: 'Weekly' }, { value: 'monthly', label: 'Monthly' }]} />
+        <RadioGroup label="Digest frequency" orientation="horizontal" defaultValue="weekly">
+          <RadioGroupItem value="daily">Daily</RadioGroupItem>
+          <RadioGroupItem value="weekly">Weekly</RadioGroupItem>
+          <RadioGroupItem value="monthly">Monthly</RadioGroupItem>
+        </RadioGroup>
       </Stack>
     </Card>
   );

@@ -5,7 +5,7 @@ import { TextField } from '../templates/library/src/components/TextField/TextFie
 import { Select, SelectItem } from '../templates/library/src/components/Select/Select';
 import { Checkbox } from '../templates/library/src/components/Checkbox/Checkbox';
 import { Switch } from '../templates/library/src/components/Switch/Switch';
-import { RadioGroup } from '../templates/library/src/components/RadioGroup/RadioGroup';
+import { RadioGroup, RadioGroupItem } from '../templates/library/src/components/RadioGroup/RadioGroup';
 import { Badge } from '../templates/library/src/components/Badge/Badge';
 import { Card, CardActions, CardDescription, CardFooter, CardHeader, CardTitle } from '../templates/library/src/components/Card/Card';
 import { Alert } from '../templates/library/src/components/Alert/Alert';
@@ -18,5 +18,5 @@ import { Grid, GridItem } from '../templates/library/src/components/Grid/Grid';
 import { Stack, StackItem } from '../templates/library/src/components/Stack/Stack';
 import { Text } from '../templates/library/src/components/Text/Text';
 
-export const LIB = { Button, TextField, Select, SelectItem, Checkbox, Switch, RadioGroup, Badge, Card, CardHeader, CardTitle, CardDescription, CardActions, CardFooter, Alert, Avatar, Tabs, TabList, Tab, TabPanel, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };
-export { Button, TextField, Select, SelectItem, Checkbox, Switch, RadioGroup, Badge, Card, CardHeader, CardTitle, CardDescription, CardActions, CardFooter, Alert, Avatar, Tabs, TabList, Tab, TabPanel, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };
+export const LIB = { Button, TextField, Select, SelectItem, Checkbox, Switch, RadioGroup, RadioGroupItem, Badge, Card, CardHeader, CardTitle, CardDescription, CardActions, CardFooter, Alert, Avatar, Tabs, TabList, Tab, TabPanel, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };
+export { Button, TextField, Select, SelectItem, Checkbox, Switch, RadioGroup, RadioGroupItem, Badge, Card, CardHeader, CardTitle, CardDescription, CardActions, CardFooter, Alert, Avatar, Tabs, TabList, Tab, TabPanel, Dialog, Tooltip, Spinner, Stack, StackItem, Grid, GridItem, Text };
